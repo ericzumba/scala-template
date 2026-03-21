@@ -1,6 +1,6 @@
 {
   "name": "scala-template",
-  "dockerComposeFile": "../docker-compose.yml",
+  "dockerComposeFile": "docker-compose.yml",
   "service": "dev",
   "workspaceFolder": "/workspace",
   "customizations": {

@@ -1,7 +1,0 @@
-services:
-  dev:
-    image: sbtscala/scala-sbt:eclipse-temurin-21.0.8_9_1.11.7_3.7.3
-    working_dir: /workspace
-    volumes:
-      - .:/workspace
-    command: sleep infinity

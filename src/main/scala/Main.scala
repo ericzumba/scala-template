@@ -1,5 +1,7 @@
-object Main:
+object Main {
   def add(a: Int, b: Int): Int = a + b
 
-  @main def run(): Unit =
+  def main(args: Array[String]): Unit = {
     println(s"2 + 3 = ${add(2, 3)}")
+  }
+}

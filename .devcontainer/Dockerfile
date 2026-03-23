@@ -1,7 +1,7 @@
-FROM sbtscala/scala-sbt:eclipse-temurin-21.0.8_9_1.11.7_3.7.3
+FROM sbtscala/scala-sbt:eclipse-temurin-17.0.15_6_1.12.6_2.12.21
 
 USER root
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends openjdk-21-source && \
+    apt-get install -y --no-install-recommends openjdk-17-source && \
     rm -rf /var/lib/apt/lists/*

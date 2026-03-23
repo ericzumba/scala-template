@@ -10,3 +10,8 @@ rm -rf .bloop .metals target project/target
 
 3. In VS Code run:
 Metals: Import Build
+
+## Restarting the whole devcontainer docker compose stack
+
+1. In VS Code run:
+Dev Containers: Rebuild Container

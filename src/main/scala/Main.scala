@@ -26,6 +26,10 @@ object Main {
       val executors = spark.sparkContext.getExecutorMemoryStatus.keys.toList.sorted
       println("Executors seen by driver:")
       executors.foreach(e =>println(s" - $e"))
+
+      val n = spark.range(1, 1000001).count()
+      println(s"Count result: $n")
+
     } finally {
       spark.stop()
     }

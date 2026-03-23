@@ -20,22 +20,21 @@ services:
     container_name: spark-master
     hostname: spark-master
     command:
-      - /opt/spark/sbin/start-master.sh
-      - -h
-      - spark-master
-      - -p
-      - "7077"
-      - --webui-port
-      - "8080"
+      - /bin/bash
+      - -lc
+      - |
+        mkdir -p /tmp/spark-work && \
+        /opt/spark/sbin/start-master.sh -h spark-master -p 7077 --webui-port 8080
     environment:
       SPARK_NO_DAEMONIZE: "true"
       SPARK_DAEMON_MEMORY: 512m
+      SPARK_MASTER_OPTS: "-Dspark.work.dir=/tmp/spark-work"
     ports:
       - "7077:7077"
       - "8080:8080"
     volumes:
       - ..:/workspace:ro
-      - spark-master-work:/opt/spark/work
+      - spark-master-tmp:/tmp/spark-work
     mem_limit: 768m
     cpus: 1.00
 
@@ -46,22 +45,20 @@ services:
     depends_on:
       - spark-master
     command:
-      - /opt/spark/sbin/start-worker.sh
-      - spark://spark-master:7077
-      - --cores
-      - "2"
-      - --memory
-      - "1G"
-      - --webui-port
-      - "8081"
+      - /bin/bash
+      - -lc
+      - |
+        mkdir -p /tmp/spark-work && \
+        /opt/spark/sbin/start-worker.sh spark://spark-master:7077 --cores 2 --memory 1G --webui-port 8081
     environment:
       SPARK_NO_DAEMONIZE: "true"
       SPARK_DAEMON_MEMORY: 512m
+      SPARK_WORKER_OPTS: "-Dspark.worker.dir=/tmp/spark-work"
     ports:
       - "8081:8081"
     volumes:
       - ..:/workspace:ro
-      - spark-worker-1-work:/opt/spark/work
+      - spark-worker-1-tmp:/tmp/spark-work
     mem_limit: 1536m
     cpus: 2.00
 
@@ -70,5 +67,5 @@ volumes:
   ivy-cache:
   sbt-cache:
   m2-cache:
-  spark-master-work:
-  spark-worker-1-work:
+  spark-master-tmp:
+  spark-worker-1-tmp:

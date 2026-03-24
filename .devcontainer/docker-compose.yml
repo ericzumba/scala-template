@@ -7,9 +7,7 @@ services:
     volumes:
       - ..:/workspace
       - coursier-cache:/home/sbtuser/.cache/coursier
-      - ivy-cache:/home/sbtuser/.ivy2
       - sbt-cache:/home/sbtuser/.sbt
-      - m2-cache:/home/sbtuser/.m2
     command: sleep infinity
     depends_on:
       - spark-master
@@ -64,8 +62,6 @@ services:
 
 volumes:
   coursier-cache:
-  ivy-cache:
   sbt-cache:
-  m2-cache:
   spark-master-tmp:
   spark-worker-1-tmp:
